@@ -26,7 +26,7 @@ repositories {
     maven { url "https://repo.grails.org/grails/core" }
 }
 
-def esVersion = '5.4.1'
+def esVersion = '7.3.0'
 ext['elasticsearch.version'] = esVersion
 ext {
 	elasticsearchVersion = esVersion
@@ -67,7 +67,7 @@ dependencies {
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 	
-	compile 'org.grails.plugins:elasticsearch:2.4.0.RC1'
+	compile 'org.grails.plugins:elasticsearch:2.7.0.RC1'
 	runtime 'org.elasticsearch.plugin:mapper-attachments:2.4.6'
 }
 

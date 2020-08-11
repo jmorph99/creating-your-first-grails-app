@@ -23,7 +23,7 @@ environments {
 		elasticSearch {
 			// default ES
 			// client.mode = 'local'
-			client.mode = 'transport'
+			client.mode = 'local'
 			client.transport.sniff = true
 			// index.store.type = 'mmapfs'
 			// client.mode
@@ -33,7 +33,7 @@ environments {
 			maxBulkRequest = 500
 			// bootstrap.config.file = 'elasticsearch-local.yml'
 			client.hosts = [
-				[host:'localhost', port:9300]
+				[host:'localhost', port:9200]
 			]
 		}
 		

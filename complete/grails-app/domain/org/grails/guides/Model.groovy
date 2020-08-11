@@ -12,4 +12,10 @@ class Model {
     String toString() {
         name
     }
+
+    static searchable = {
+        only = ['name']
+        name boost: 3.0
+
+    }
 }
