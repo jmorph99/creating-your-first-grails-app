@@ -10,7 +10,7 @@ elasticSearch {
 	bulkIndexOnStartup = false
 }
 
-
+grails.dbconsole.enabled = true
 
 environments {
 	
@@ -36,11 +36,12 @@ environments {
 				[host:'localhost', port:9200]
 			]
 		}
-		
+
+
 		dataSources {
 			dataSource {
 				dbCreate = "create-drop"
-				url = "jdbc:h2:./prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+				url = "jdbc:h2:mem:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
 				pooled = true
 				jmxExport = true
 				driverClassName = "org.h2.Driver"
