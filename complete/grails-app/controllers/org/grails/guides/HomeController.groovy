@@ -1,6 +1,7 @@
 package org.grails.guides
 import grails.plugins.elasticsearch.ElasticSearchService
 import grails.plugins.elasticsearch.ElasticSearchResult
+import org.elasticsearch.action.search.SearchRequest
 import org.elasticsearch.search.aggregations.Aggregation
 import org.elasticsearch.search.aggregations.AggregationBuilders
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms
@@ -20,16 +21,34 @@ class HomeController {
         session.name = params.name
         String sname = params.name
         flash.message = 'Name has been updated'
-        ElasticSearchResult res = elasticSearchService.search(sname, [indices:'blogs'])
+
+        ElasticSearchResult res = elasticSearchService.search(
+                {
+                    bool {
+                    must {
+                        nested {
+                            path = "vehicle"
+                            query {
+
+                                        term("vehicle.name": sname)
+
+                            }
+                        }
+                    }
+                    }
+                },
+                [indices:'org.grails.guides.owners_read'])
+
         response.setHeader("Content-Type", "text/html")
         response.outputStream << "<h3>Titles</h3>"
         res.searchResults.each {
-            response.outputStream << it['title'].toString() + "<br/>"
+            response.outputStream << it["firstName"].toString() + " " + it["lastName"].toString() + " " + it["age"].toString()+ "<br/>"
         }
         ArrayList<Aggregation> aggs = []
         aggs << AggregationBuilders.terms('Authors').field('author.keyword')
+
         ElasticSearchResult res2 = elasticSearchService.search(
-                sname,
+                "test",
                 null as Closure,
                 {
 

@@ -8,7 +8,7 @@ class Vehicle {
     String name
     Model model
     Make make
-
+    //static belongsTo = [Owners]
     static constraints = {
         year min: 1900
         name maxSize: 255
